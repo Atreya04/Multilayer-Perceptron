@@ -7,7 +7,7 @@ from sklearn.neural_network import MLPRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import StandardScaler
 import warnings
-
+#lol
 warnings.filterwarnings("ignore", message="X does not have valid feature names, but StandardScaler was fitted with feature names")
 
 # Load the dataset
