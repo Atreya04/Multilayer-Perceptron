@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings("ignore", message="X does not have valid feature names, but StandardScaler was fitted with feature names")
 
-df = pd.read_csv("Multilayer-Perceptron/Climate Dataset/IndianWeatherRepository.csv")
+df = pd.read_csv("Multilayer-Perceptron/Climate Dataset/DailyDelhiClimateTrain.csv")
 
 if "date" in df.columns:
     df = df.drop("date", axis=1)
