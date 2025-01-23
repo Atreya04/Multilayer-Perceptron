@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings("ignore", message="X does not have valid feature names, but StandardScaler was fitted with feature names")
@@ -46,7 +46,9 @@ mlp.fit(x_train, y_train)
 
 y_pred = mlp.predict(x_test)
 mse = mean_squared_error(y_test, y_pred)
+r2_score = r2_score(y_test, y_pred)
 print(f"Mean Squared Error: {mse:.4f}")
+print(f"R2 Error: {r2_score:.4f}")
 
 print("\nEnter the following features to predict the mean temperature:")
 input_features = {}
