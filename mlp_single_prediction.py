@@ -10,7 +10,7 @@ import warnings
 
 warnings.filterwarnings("ignore", message="X does not have valid feature names, but StandardScaler was fitted with feature names")
 
-df = pd.read_csv("Multilayer Perceptron/Climate Dataset/DailyDelhiClimateTrain.csv")
+df = pd.read_csv("Climate Dataset/DailyDelhiClimateTrain.csv")
 df = df.drop("date", axis = 1)
 
 corr_matrix = df.corr()
@@ -37,6 +37,7 @@ mlp = MLPRegressor(
     max_iter=2000,
     random_state=42,
     learning_rate_init=0.05,
+    verbose = True
 )
 
 mlp.fit(x_train, y_train)
