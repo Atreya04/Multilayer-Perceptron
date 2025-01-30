@@ -19,7 +19,7 @@ df = df.drop("date", axis=1)
 corr_matrix = df.corr()
 print(corr_matrix)
 plt.figure(figsize=(12, 10))
-sns.heatmap(corr_matrix, annot=True, cmap='Bluess')
+sns.heatmap(corr_matrix, annot=True, cmap='Blues')
 plt.title("Correlation Matrix")
 plt.show()
 
@@ -39,7 +39,6 @@ mlp = MLPRegressor(
     max_iter=2000,
     random_state=42,
     learning_rate_init=0.05,
-    verbose = True
 )
 
 mlp.fit(x_train, y_train)
@@ -73,7 +72,7 @@ plt.ylabel("Mean Temperature")
 plt.title("Actual vs. Predicted Mean Temperature (Sampled)")
 plt.legend()
 plt.show()
-'''
+
 print("\nEnter the following features to predict the mean temperature:")
 input_features = {}
 
@@ -85,4 +84,3 @@ user_input_scaled = scaler.transform(user_input)
 
 predicted_temp = mlp.predict(user_input_scaled)[0]
 print(f"\nPredicted Mean Temperature: {predicted_temp:.2f}°C")
-'''
