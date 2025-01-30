@@ -11,7 +11,7 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings("ignore", message="X does not have valid feature names, but StandardScaler was fitted with feature names")
 
-df = pd.read_csv("Climate Dataset/DailyDelhiClimateTrain.csv")
+df = pd.read_csv("Climate Dataset/DailyDelhiClimate.csv")
 df = df.drop("date", axis=1)
 
 #Correlation Matrix 
@@ -64,9 +64,9 @@ print(f"Testing R2 Score: {test_r2_score:.4f}")
 plt.figure(figsize=(8, 6))
 plt.scatter(y_test, y_pred, alpha=0.7, color='blue')
 plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', linewidth=2)
-plt.title("Actual vs Predicted Mean Temperature")
-plt.xlabel("Actual Mean Temperature")
-plt.ylabel("Predicted Mean Temperature")
+plt.title("Actual vs Predicted Mean Temperature (in °C)")
+plt.xlabel("Actual Mean Temperature (in °C)")
+plt.ylabel("Predicted Mean Temperature (in °C)")
 plt.grid(True)
 plt.show()
 
@@ -78,9 +78,9 @@ y_pred_sampled = y_pred[::sample_step]
 plt.figure(figsize=(10, 6))
 plt.plot(y_test_sampled.values, label='Actual Mean Temperature', color='b')
 plt.plot(y_pred_sampled, label='Predicted Mean Temperature', color='r')
-plt.xlabel("Sample Index")
-plt.ylabel("Mean Temperature")
-plt.title("Actual vs. Predicted Mean Temperature (Sampled)")
+plt.xlabel("Actual Mean Temperature (in °C)")
+plt.ylabel("Predicted Mean Temperature (in °C)")
+plt.title("Actual vs. Predicted Mean Temperature (in °C)")
 plt.legend()
 plt.show()
 
