@@ -12,7 +12,6 @@ import warnings
 warnings.filterwarnings("ignore", message="X does not have valid feature names, but StandardScaler was fitted with feature names")
 
 df = pd.read_csv("Climate Dataset/DailyDelhiClimateTrain.csv")
-
 df = df.drop("date", axis=1)
 
 #Correlation Matrix 
@@ -39,15 +38,27 @@ mlp = MLPRegressor(
     max_iter=2000,
     random_state=42,
     learning_rate_init=0.05,
+    verbose=True
 )
 
 mlp.fit(x_train, y_train)
 
 y_pred = mlp.predict(x_test)
-mse = mean_squared_error(y_test, y_pred)
-r2_score = r2_score(y_test, y_pred)
-print(f"Mean Squared Error: {mse:.4f}")
-print(f"R2 Score: {r2_score:.4f}")
+
+#Training performance
+y_train_pred = mlp.predict(x_train)
+train_mse = mean_squared_error(y_train, y_train_pred)
+train_r2_score = r2_score(y_train, y_train_pred)
+print(f"Training Mean Squared Error: {train_mse:.4f}")
+print(f"Training R2 Score: {train_r2_score:.4f}")
+
+#Testing performance
+y_test_pred = mlp.predict(x_test)
+test_mse = mean_squared_error(y_test, y_test_pred)
+test_r2_score = r2_score(y_test, y_test_pred)
+print(f"Testing Mean Squared Error: {test_mse:.4f}")
+print(f"Testing R2 Score: {test_r2_score:.4f}")
+
 
 #Scatter Plot
 plt.figure(figsize=(8, 6))
