@@ -15,10 +15,11 @@ df = pd.read_csv("Climate Dataset/DailyDelhiClimateTrain.csv")
 
 df = df.drop("date", axis=1)
 
+#Correlation Matrix 
 corr_matrix = df.corr()
 print(corr_matrix)
 plt.figure(figsize=(12, 10))
-sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
+sns.heatmap(corr_matrix, annot=True, cmap='Bluess')
 plt.title("Correlation Matrix")
 plt.show()
 
@@ -49,6 +50,30 @@ r2_score = r2_score(y_test, y_pred)
 print(f"Mean Squared Error: {mse:.4f}")
 print(f"R2 Score: {r2_score:.4f}")
 
+#Scatter Plot
+plt.figure(figsize=(8, 6))
+plt.scatter(y_test, y_pred, alpha=0.7, color='blue')
+plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', linewidth=2)
+plt.title("Actual vs Predicted Mean Temperature")
+plt.xlabel("Actual Mean Temperature")
+plt.ylabel("Predicted Mean Temperature")
+plt.grid(True)
+plt.show()
+
+# Line plot with sampled data points
+sample_step = 10
+y_test_sampled = y_test[::sample_step]
+y_pred_sampled = y_pred[::sample_step]
+
+plt.figure(figsize=(10, 6))
+plt.plot(y_test_sampled.values, label='Actual Mean Temperature', color='b')
+plt.plot(y_pred_sampled, label='Predicted Mean Temperature', color='r')
+plt.xlabel("Sample Index")
+plt.ylabel("Mean Temperature")
+plt.title("Actual vs. Predicted Mean Temperature (Sampled)")
+plt.legend()
+plt.show()
+'''
 print("\nEnter the following features to predict the mean temperature:")
 input_features = {}
 
@@ -60,3 +85,4 @@ user_input_scaled = scaler.transform(user_input)
 
 predicted_temp = mlp.predict(user_input_scaled)[0]
 print(f"\nPredicted Mean Temperature: {predicted_temp:.2f}°C")
+'''
