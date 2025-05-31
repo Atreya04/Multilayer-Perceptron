@@ -11,16 +11,16 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings("ignore", message="X does not have valid feature names, but StandardScaler was fitted with feature names")
 
-df = pd.read_csv("Climate Dataset/DailyDelhiClimate.csv")
+df = pd.read_csv("/Users/atreyagnayak/NNDL-PBL/Hybrid Radial Bias NN/Climate Dataset/DailyDelhiClimate.csv")
 df = df.drop("date", axis=1)
 
-#Correlation Matrix 
-corr_matrix = df.corr()
-print(corr_matrix)
-plt.figure(figsize=(12, 10))
-sns.heatmap(corr_matrix, annot=True, cmap='Blues')
-plt.title("Correlation Matrix")
-plt.show()
+# #Correlation Matrix 
+# corr_matrix = df.corr()
+# print(corr_matrix)
+# plt.figure(figsize=(12, 10))
+# sns.heatmap(corr_matrix, annot=True, cmap='Blues')
+# plt.title("Correlation Matrix")
+# plt.show()
 
 x = df.drop("meantemp", axis=1) 
 y = df["meantemp"]
@@ -37,7 +37,7 @@ mlp = MLPRegressor(
     learning_rate='adaptive',
     max_iter=2000,
     random_state=42,
-    learning_rate_init=0.05,
+    learning_rate_init=0.02,
     verbose=True
 )
 
@@ -60,17 +60,16 @@ print(f"Testing Mean Squared Error: {test_mse:.4f}")
 print(f"Testing R2 Score: {test_r2_score:.4f}")
 
 
-#Scatter Plot
-plt.figure(figsize=(8, 6))
-plt.scatter(y_test, y_pred, alpha=0.7, color='blue')
-plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', linewidth=2)
-plt.title("Actual vs Predicted Mean Temperature (in °C)")
-plt.xlabel("Actual Mean Temperature (in °C)")
-plt.ylabel("Predicted Mean Temperature (in °C)")
-plt.grid(True)
-plt.show()
+# #Scatter Plot
+# plt.figure(figsize=(8, 6))
+# plt.scatter(y_test, y_pred, alpha=0.7, color='blue')
+# plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', linewidth=2)
+# plt.title("Actual vs Predicted Mean Temperature (in °C)")
+# plt.xlabel("Actual Mean Temperature (in °C)")
+# plt.ylabel("Predicted Mean Temperature (in °C)")
+# plt.grid(True)
+# plt.show()
 
-# Line plot with sampled data points
 sample_step = 10
 y_test_sampled = y_test[::sample_step]
 y_pred_sampled = y_pred[::sample_step]
@@ -78,20 +77,26 @@ y_pred_sampled = y_pred[::sample_step]
 plt.figure(figsize=(10, 6))
 plt.plot(y_test_sampled.values, label='Actual Mean Temperature', color='b')
 plt.plot(y_pred_sampled, label='Predicted Mean Temperature', color='r')
-plt.xlabel("Points")
-plt.ylabel("Mean Temperature (in °C)")
-plt.title("Actual vs. Predicted Mean Temperature (in °C)")
-plt.legend()
+plt.xlabel("Points", fontsize=20, labelpad=20)
+plt.ylabel("Mean Temperature (in °C)", fontsize=20, labelpad=20)
+# plt.title("Actual vs. Predicted Mean Temperature (in °C)", fontsize=20, fontweight='bold')
+
+plt.xticks(fontsize=16)
+plt.yticks(np.arange(0, max(y_test_sampled.max(), y_pred_sampled.max()) + 5, 5), fontsize=16)
+
+plt.legend(loc="lower right", fontsize=16)
+plt.grid(True)
+plt.tight_layout()
 plt.show()
 
-print("\nEnter the following features to predict the mean temperature:")
-input_features = {}
+# print("\nEnter the following features to predict the mean temperature:")
+# input_features = {}
 
-for feature in x.columns:
-    input_features[feature] = float(input(f"{feature.replace('_', ' ').capitalize()}: "))
+# for feature in x.columns:
+#     input_features[feature] = float(input(f"{feature.replace('_', ' ').capitalize()}: "))
 
-user_input = np.array([list(input_features.values())])
-user_input_scaled = scaler.transform(user_input)
+# user_input = np.array([list(input_features.values())])
+# user_input_scaled = scaler.transform(user_input)
 
-predicted_temp = mlp.predict(user_input_scaled)[0]
-print(f"\nPredicted Mean Temperature: {predicted_temp:.2f}°C")
+# predicted_temp = mlp.predict(user_input_scaled)[0]
+# print(f"\nPredicted Mean Temperature: {predicted_temp:.2f}°C")
